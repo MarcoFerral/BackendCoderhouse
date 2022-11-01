@@ -1,12 +1,11 @@
-const moment = require('moment')
+const { conectar } = require("./servidor.js");
 
-const hoy = moment()
-const nacimiento = moment("03/04/1984", "DD/MM/YYYY")
 
-const difYear = hoy.diff(nacimiento, 'years');
-const difDays = hoy.diff(nacimiento, 'days');
-
-console.log(`Hoy es ${hoy.format("DD/MM/YYYY")}`)
-console.log(`Nací el ${nacimiento.format("DD/MM/YYYY")}`)
-console.log(`Desde mi nacimiento han pasado ${difYear} años.`)
-console.log(`Desde mi nacimiento han pasado ${difDays} días.`)
+async function main() {
+    try {
+        const serv = await conectar(8080);
+        console.log(`conectado al puerto ${serv.address().port}`);
+    } catch (error) {
+        console.log('No se puede conectar: ' + error);
+    }
+}
